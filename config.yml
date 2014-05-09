@@ -4,11 +4,11 @@
 mail:
   address: smtp.gmail.com
   port: 587
-  user_name: shoprev.ty@gmail.com
+  user_name: foo@gmail.com
   domain: gmail.com
-  password: shoprev07
-  from: shoprev.ty@gmail.com
-  to: shoprev.ty@gmail.com
+  password: bar
+  from: foo@gmail.com
+  to: baz@gmail.com
 
 #
 # failure monitoring term
