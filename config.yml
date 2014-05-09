@@ -24,7 +24,7 @@ term: 1h
 #
 urls:
   - https://www.heroku.com
-  - https://www.google.com/foo
+  - https://www.google.com
   - https://www.yahoo.com
   - https://twitter.com
   - https://www.facebook.com
