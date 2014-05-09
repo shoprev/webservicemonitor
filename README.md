@@ -1,15 +1,16 @@
 # webservicemonitor
 
-Ruby Sinatra Simple Web Service Health Monitor
+Ruby Sinatra Simple Web Service Health Monitor.
+
 See the [Demo](http://webservicemonitor.herokuapp.com/).
 
 ## Setup
 
-    $ git clone git://github.com/shoprev/webservicemonitor.git
-    $ cd webservicemonitor
+    $ git clone git://github.com/shoprev/webservicemonitor.git mymonitor
+    $ cd mymonitor
 
 Modify the config.yml file.
-
+```yaml
     #
     # failure mail delivery config
     #
@@ -40,7 +41,7 @@ Modify the config.yml file.
       - https://www.yahoo.com
       - https://twitter.com
       - https://www.facebook.com
-
+```
 And then execute:
 
     $ bundle
