@@ -57,11 +57,13 @@ get '/stream', provides: 'text/event-stream' do
 end
 
 get '/' do
+  logger.error "---------- / ----------"
   html=""
   settings.yaml["urls"].each.with_index(1) do |v,i|
     code = response_code(v)
     time = Time.now	
     deliver_mail({"url"=>v,"code"=>code,"time"=>time}) unless code == "200"
+    logger.error "---------- #{code} ----------"
     html<< "<tr id=\"no#{i}\" class=\"#{code == "200" ? "default" : "warning"}\">
     <td>#{i}</td><td><a href=\"#{v}\" target=\"_blank\">#{v.sub(/http(s):\/\//,"")}</a></td>
     <td id=\"code#{i}\">#{code}</td><td id=\"time#{i}\">#{time}</td></tr>"
