@@ -17,46 +17,46 @@ config_file './config.yml'
 settings.scheduler = Rufus::Scheduler.new
 logger.error "---------- config.yml e ----------"
 
-opt = { address:   settings.mail["address"],
-        port:      settings.mail["port"],
-        domain:    settings.mail["domain"],
-        user_name: settings.mail["user_name"],
-        password:  settings.mail["password"]}
-Mail.defaults do
-  delivery_method :smtp, opt
-end
+# opt = { address:   settings.mail["address"],
+#         port:      settings.mail["port"],
+#         domain:    settings.mail["domain"],
+#         user_name: settings.mail["user_name"],
+#         password:  settings.mail["password"]}
+# Mail.defaults do
+#   delivery_method :smtp, opt
+# end
 
-def deliver_mail(h)
-  Mail.deliver do
-    from    Sinatra::Application.settings.mail["from"]
-    to      Sinatra::Application.settings.mail["to"]
-    subject "web service failure"
-    body    "%s\n%s\n%s" % [h["url"],h["code"],h["time"]]
-  end
-end
+# def deliver_mail(h)
+#   Mail.deliver do
+#     from    Sinatra::Application.settings.mail["from"]
+#     to      Sinatra::Application.settings.mail["to"]
+#     subject "web service failure"
+#     body    "%s\n%s\n%s" % [h["url"],h["code"],h["time"]]
+#   end
+# end
 
-def response_code(url)
-  Net::HTTP.get_response(URI.parse(url)).code
-end
+# def response_code(url)
+#   Net::HTTP.get_response(URI.parse(url)).code
+# end
 
-settings.scheduler.every settings.term do
-  settings.urls.each.with_index(1) do |v,i|
-    code = response_code(v)
-    time = Time.now	
-    deliver_mail({"url"=>v,"code"=>code,"time"=>time}) unless code == "200"
-    settings.connections.each do |out|
-      out << "data: {\"no\":\"#{i}\",\"url\":\"#{v}\",\"code\":\"#{code}\",\"time\":\"#{time}\"}\n\n" 
-    end
-  end
-end
+# settings.scheduler.every settings.term do
+#   settings.urls.each.with_index(1) do |v,i|
+#     code = response_code(v)
+#     time = Time.now	
+#     deliver_mail({"url"=>v,"code"=>code,"time"=>time}) unless code == "200"
+#     settings.connections.each do |out|
+#       out << "data: {\"no\":\"#{i}\",\"url\":\"#{v}\",\"code\":\"#{code}\",\"time\":\"#{time}\"}\n\n" 
+#     end
+#   end
+# end
 
-get '/stream', provides: 'text/event-stream' do
-  response.headers['X-Accel-Buffering'] = 'no' # Disable buffering for nginx
-  stream :keep_open do |out|
-    settings.connections << out
-    out.callback { settings.connections.delete(out) }
-  end
-end
+# get '/stream', provides: 'text/event-stream' do
+#   response.headers['X-Accel-Buffering'] = 'no' # Disable buffering for nginx
+#   stream :keep_open do |out|
+#     settings.connections << out
+#     out.callback { settings.connections.delete(out) }
+#   end
+# end
 
 get '/' do
   logger.error "---------- / ----------"
