@@ -13,7 +13,7 @@ set server: 'thin', connections: []
 set scheduler: Rufus::Scheduler
 
 logger.error "---------- config.yml s ----------"
-config_file 'config.yml'
+config_file './config.yml'
 settings.scheduler = Rufus::Scheduler.new
 logger.error "---------- config.yml e ----------"
 
