@@ -7,15 +7,14 @@ mail:
   from: shoprev.ty@gmail.com
   to: shoprev.ty@gmail.com
 
-scheduler:
-  # 10h => 10 hours
-  # 10d => 10 days
-  # 10s => 10 seconds
-  # 10m => 10 minutes
-  term: 20s
+# 10h => 10 hours
+# 10d => 10 days
+# 10s => 10 seconds
+# 10m => 10 minutes
+term: 20s
 
 urls:
-  # - https://www.google.com
+  - https://www.google.com
   - https://www.heroku.com
   - https://www.yahoo.com
   - https://twitter.com

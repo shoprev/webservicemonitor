@@ -1,6 +1,6 @@
 # coding: utf-8
 require "sinatra"
-require "yaml"
+require "sinatra/config_file"
 require 'mail'
 require "net/http"
 require 'rufus/scheduler'
@@ -9,36 +9,36 @@ if development?
   set :bind, '0.0.0.0'
 end
 
-set server: 'thin', connections: [], yaml: {}
+set server: 'thin', connections: []
 set scheduler: Rufus::Scheduler
 
-settings.yaml = YAML.load(open("config.yml").read)
+config_file 'config.yml'
 settings.scheduler = Rufus::Scheduler.new
 
-opt = { address:   settings.yaml["mail"]["address"],
-        port:      settings.yaml["mail"]["port"],
-        domain:    settings.yaml["mail"]["domain"],
-        user_name: settings.yaml["mail"]["user_name"],
-        password:  settings.yaml["mail"]["password"]}
+opt = { address:   settings.mail["address"],
+        port:      settings.mail["port"],
+        domain:    settings.mail["domain"],
+        user_name: settings.mail["user_name"],
+        password:  settings.mail["password"]}
 Mail.defaults do
   delivery_method :smtp, opt
 end
 
 def deliver_mail(h)
   Mail.deliver do
-    from    Sinatra::Application.settings.yaml["mail"]["from"]
-    to      Sinatra::Application.settings.yaml["mail"]["to"]
+    from    Sinatra::Application.settings.mail["from"]
+    to      Sinatra::Application.settings.mail["to"]
     subject "web service failure"
     body    "%s\n%s\n%s" % [h["url"],h["code"],h["time"]]
   end
 end
 
 def response_code(url)
-  "200" #Net::HTTP.get_response(URI.parse(url)).code
+  Net::HTTP.get_response(URI.parse(url)).code
 end
 
-settings.scheduler.every settings.yaml["scheduler"]["term"] do
-  settings.yaml["urls"].each.with_index(1) do |v,i|
+settings.scheduler.every settings.term do
+  settings.urls.each.with_index(1) do |v,i|
     code = response_code(v)
     time = Time.now	
     deliver_mail({"url"=>v,"code"=>code,"time"=>time}) unless code == "200"
@@ -59,7 +59,7 @@ end
 get '/' do
   logger.error "---------- / ----------"
   html=""
-  settings.yaml["urls"].each.with_index(1) do |v,i|
+  settings.urls.each.with_index(1) do |v,i|
     code = response_code(v)
     time = Time.now	
     deliver_mail({"url"=>v,"code"=>code,"time"=>time}) unless code == "200"

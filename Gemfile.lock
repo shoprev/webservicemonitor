@@ -4,7 +4,12 @@ GEM
     backports (3.6.0)
     daemons (1.1.9)
     eventmachine (1.0.3)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25)
     multi_json (1.10.0)
+    polyglot (0.3.3)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -29,6 +34,9 @@ GEM
       rack (>= 1.0.0)
     thread_safe (0.3.3)
     tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (1.1.0)
       thread_safe (~> 0.1)
 
@@ -36,6 +44,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mail
   rufus-scheduler
   sinatra
   sinatra-contrib
