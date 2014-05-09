@@ -13,10 +13,10 @@ mail:
 #
 # failure monitoring term
 #
-# 1h => 1 hours
-# 1d => 1 days
-# 1s => 1 seconds
-# 1m => 1 minutes
+# 1h => every 1 hours
+# 1d => every 1 days
+# 1s => every 1 seconds
+# 1m => every 1 minutes
 term: 1h
 
 #

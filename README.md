@@ -11,36 +11,36 @@ See the [Demo](http://webservicemonitor.herokuapp.com/).
 
 Modify the config.yml file.
 ```yaml
-    #
-    # failure mail delivery config
-    #
-    mail:
-      address: smtp.gmail.com
-      port: 587
-      user_name: foo@gmail.com
-      domain: gmail.com
-      password: bar
-      from: foo@gmail.com
-      to: baz@gmail.com
+#
+# failure mail delivery config
+#
+mail:
+  address: smtp.gmail.com
+  port: 587
+  user_name: foo@gmail.com
+  domain: gmail.com
+  password: bar
+  from: foo@gmail.com
+  to: baz@gmail.com
 
-    #
-    # failure monitoring term
-    #
-    # 1h => 1 hours
-    # 1d => 1 days
-    # 1s => 1 seconds
-    # 1m => 1 minutes
-    term: 1h
+#
+# failure monitoring term
+#
+# 1h => every 1 hours
+# 1d => every 1 days
+# 1s => every 1 seconds
+# 1m => every 1 minutes
+term: 1h
 
-    #
-    # failure monitoring urls
-    #
-    urls:
-      - https://www.heroku.com
-      - https://www.google.com
-      - https://www.yahoo.com
-      - https://twitter.com
-      - https://www.facebook.com
+#
+# failure monitoring urls
+#
+urls:
+  - https://www.heroku.com
+  - https://www.google.com
+  - https://www.yahoo.com
+  - https://twitter.com
+  - https://www.facebook.com
 ```
 And then execute:
 
