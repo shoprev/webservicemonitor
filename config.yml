@@ -15,7 +15,7 @@ scheduler:
   term: 20s
 
 urls:
-  - https://www.google.com
+  # - https://www.google.com
   - https://www.heroku.com
   - https://www.yahoo.com
   - https://twitter.com
