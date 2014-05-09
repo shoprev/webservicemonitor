@@ -4,6 +4,4 @@ gem 'sinatra'
 gem 'rufus-scheduler'
 gem 'thin'
 gem 'mail'
-group :development do
-  gem 'sinatra-contrib'
-end
+gem 'sinatra-contrib'
